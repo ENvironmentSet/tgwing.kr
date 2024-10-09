@@ -9,6 +9,22 @@ export default defineConfig({
       babel: {
         plugins: ['@emotion/babel-plugin'],
       },
-    })
+    }),
   ],
+
+  optimizeDeps: {
+    include: ['esm-dep > cjs-dep'],
+  },
+
+  server: {
+    proxy: {
+      '/api': {
+        target:
+          'http://ec2-43-200-221-178.ap-northeast-2.compute.amazonaws.com',
+        changeOrigin: true,
+        secure: false,
+        ws: true,
+      },
+    },
+  },
 })
